@@ -36,3 +36,73 @@
     transform: rotate(360deg);
   }
 }
+
+.chatBox {
+  width: 375px;
+  height: 667px;
+  background-color: #9bbbd4;
+}
+
+.chat {
+  width: 375px;
+  height: 615px;
+  background-color: #9bbbd4;
+}
+
+.send {
+  width: 375px;
+  height: 52px;
+  background-color: #556677;
+}
+
+.myInput {
+  width: 262px;
+  height: 24px;
+  margin: 11px 0 0 -83px;
+}
+
+.sendForm {
+  display: inline-block;
+}
+
+.sendBtn {
+  width: 76px;
+  height: 28px;
+  position: absolute;
+  margin: 11px 0 0 10px;
+}
+
+.msg {
+  /* border: 1px white solid; */
+  width: 400px;
+  height: 550px;
+  background-color: #9bbbd4;
+  font-size: 20px;
+  overflow: auto;
+  margin: auto;
+  color: white;
+}
+
+.notification-container {
+  display: none;
+  position: absolute;
+  font-size: 0.8em;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  padding: 20px 20px;
+  margin: auto;
+  margin-top: 300px;
+  margin-left: 100px;
+}
+
+.notification-container.show {
+  display: block;
+}
+.msgLine {
+  margin: 5px 15px;
+}
+.msgBox {
+  background: #fef01b;
+  color: black;
+  font-size: 14px;
+}
