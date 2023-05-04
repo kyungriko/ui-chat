@@ -16,11 +16,14 @@ const Array = (e) => {
     setList(newList);
     setInputText("");
 
+    let req = {"message": inputText};
+
     // 질문이 등록됐을을 때, axios 호출해서 답변을 받아온다.
     axios
-      .get("https://codingapple1.github.io/shop/data2.json")
+      .post("http://localhost:3000/chat/call", req)
       .then((result) => {
-        const newList = resList.concat(result.data[0].content);
+        console.log(result);
+        const newList = resList.concat(result.data.message);
         setResList(newList);
       })
       .catch(() => {
