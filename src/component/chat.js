@@ -11,8 +11,8 @@ class Chat extends Component {
 
   render() {
     return (
-      <div className="msgLine" id={this.state.id}>
-        <div className="msgBox">
+      <div className="test">
+        <div className="msgBox" id={this.state.id}>
           <p>{this.state.chatValue}</p>
         </div>
       </div>

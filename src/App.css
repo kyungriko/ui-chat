@@ -99,10 +99,18 @@
   display: block;
 }
 .msgLine {
-  margin: 5px 15px;
+  max-width: 200px;
+  /* float: right; */
 }
 .msgBox {
   background: #fef01b;
   color: black;
   font-size: 14px;
+  word-break: break-all;
+  text-align: left;
+  max-width: 200px;
+}
+.date {
+  top: 90%;
+  left: 55%;
 }
