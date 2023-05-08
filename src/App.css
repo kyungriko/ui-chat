@@ -39,37 +39,62 @@
 
 .chatBox {
   width: 375px;
-  height: 667px;
-  background-color: #9bbbd4;
+  background-color: #74EBD5;
+  background-image: linear-gradient(90deg, #74EBD5 0%, #9FACE6 100%);
 }
 
 .chat {
   width: 375px;
-  height: 615px;
-  background-color: #9bbbd4;
+  height: 520px;
+  overflow: auto;
+  background-color: #fff;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
 }
 
 .send {
-  width: 375px;
-  height: 52px;
-  background-color: #556677;
+  /* width: 375px;
+  height: 52px; */
+  background-color: #fff;
+  display:flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
 }
 
 .myInput {
-  width: 262px;
-  height: 24px;
-  margin: 11px 0 0 -83px;
+  border: 1px solid #000;
+  background-color: rgba(0, 0, 0, 0);
+  width: 290px;
+  height: 100%;
+  float: left;
+  margin-left: 15px;
+  border:none;
+}
+
+.myInput:focus-visible {
+  outline: none;
 }
 
 .sendForm {
-  display: inline-block;
+  align-self: center;
+  flex-grow: 1;
+  margin: 8px;
+  height: 40px;
+  border-radius: 18px 21px 21px 18px;
+  background-color: #F6F6F6;
 }
 
 .sendBtn {
-  width: 76px;
-  height: 28px;
-  position: absolute;
-  margin: 11px 0 0 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 21px;
+  margin-left: 10px;
+  border: none;
+  background-image: url("./assets/send.png");
+  background-color: #45BF6D; /* make the button transparent */
+  background-repeat: no-repeat;  /* make the background image appear only once */
+  background-position: 8px 8px;  /* equivalent to 'top left' */
 }
 
 .msg {
@@ -102,15 +127,104 @@
   max-width: 200px;
   /* float: right; */
 }
+
+/* 답변 말풍선 #F4C5C1  */
 .msgBox {
-  background: #fef01b;
   color: black;
   font-size: 14px;
   word-break: break-all;
   text-align: left;
-  max-width: 200px;
+  max-width: 250px;
+  padding: 10px 15px 10px 15px;
+  
+  margin: 10px;
+  
 }
 .date {
   top: 90%;
   left: 55%;
+}
+
+
+
+.questionContainer > .questionChat {
+  width: 100%;
+  display: flex;
+}
+.questionContainer > .questionChat > .msgBox {
+  background: #FEE0DB;
+  margin-left:auto;
+  border-radius: 15px 15px 0 15px;
+}
+
+.answerContainer > .answerChat {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.answerContainer > .answerChat > .msgBox {
+  background: #CCEEFC;
+  margin-right: auto;
+  border-radius: 15px 15px 15px 0px;
+}
+
+
+.chatHeader {
+  height: 100px;
+}
+
+.chatContainer {
+  padding-top: 20px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.questionUsericon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #FEE0DB; /* make the button transparent */
+}
+
+.answerUsericon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #CCEEFC; /* make the button transparent */
+}
+
+.userIcon {
+  position: relative;
+  top: 5px;
+}
+
+.chatTitle {
+  color: #000;
+  text-align: left;
+  margin-left: 30px;
+  padding-top: 20px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.msgBox > p {
+  margin-block-end: 5px;
+  margin-block-start: 5px;
+}
+
+.answerChat button {
+  width: 110px;
+  height: 20px;
+  text-align: right;
+  font-weight: bold;
+  color: #3BB55A;
+  margin-left: 50px;
+  background-image: url('./assets/download.png');
+  background-repeat: no-repeat;
+  background-color: #fff;
+  border: 1px solid #3BB55A;
+  padding: 3px;
+  background-size: 18px;
 }
