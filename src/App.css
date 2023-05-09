@@ -32,8 +32,7 @@
   from {
     transform: rotate(0deg);
   }
-  to {
-    transform: rotate(360deg);
+  to {transform: rotate(360deg);
   }
 }
 
@@ -227,4 +226,43 @@
   border: 1px solid #3BB55A;
   padding: 3px;
   background-size: 18px;
+}
+
+.loadingStop {
+  display: none;
+}
+
+.loadingStart {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.loadingStart > img {
+  align-self: center;
+  margin-left: auto;
+  margin-right: 40px;
+}
+
+.chatMain {
+  overflow: auto;
+  height: 430px;
+}
+
+.loadingStart > span {
+  align-self: center;
+  background: linear-gradient(90deg,#ab6bff,#9ad5f9 15%,#575df0 35%,#ab6bff 50%,#9ad5f9 65%,#575df0 85%,#ab6bff);
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient 3.5s linear infinite;
+  background-size: 200% 100%;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0;
+  }
+  100% {
+    background-position: 100%;
+  }
 }
