@@ -39,7 +39,8 @@ const Array = (e) => {
         let len = tempList.length;
         result = {
           question: tempList[len - 1].question,
-          answer: str,
+          answer: str.message,
+          code: str.code,
           qId: tempList[len - 1].qId,
           aId: tempList[len - 1].aId,
         };
@@ -51,6 +52,7 @@ const Array = (e) => {
         result = {
           question: str,
           answer: "",
+          code: "",
           qId: "q" + counter,
           aId: "a" + counter,
         };
@@ -76,7 +78,7 @@ const Array = (e) => {
         const newList = resList.concat(result.data.message);
         setResList(newList);
         setIsLoading((check) => {return false;});
-        updateChatHistory("answer", result.data.message);
+        updateChatHistory("answer", result.data);
       })
       .catch(() => {
         //error
@@ -103,7 +105,7 @@ const Array = (e) => {
                 {resList.map((el, idx) => {
                   if (idx === i) {
                     return (
-                      <Answer name={el} id={chatList[i].aId + "answer_list"} seq={idx}/>
+                      <Answer name={el} id={chatList[i].aId + "answer_list"} seq={idx} answerCode={chatList[i].code}/>
                     );
                   }
                 })}

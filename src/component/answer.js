@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import logoIcon from "../assets/logo.png";
-import loadingImg from "../assets/loading.webp";
 import axios from "axios";
+import { CopyBlock, nord } from "react-code-blocks";
 
 class Answer extends Component {
   constructor(props) {
@@ -10,6 +10,7 @@ class Answer extends Component {
       chatValue: props.name,
       id: props.id,
       seq: props.seq,
+      answerCode: props.answerCode,
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -37,7 +38,23 @@ class Answer extends Component {
         <div className="msgBox">
           <p key={this.state.id}>{this.state.chatValue}</p>
         </div>
-        <button onClick={this.handleClick}>예제 파일 다운로드</button>
+        <div className="msgBox">
+        <CopyBlock
+          text={this.state.answerCode}
+          language={'html'}
+          showLineNumbers={true}
+          startingLineNumber={true}
+          wrapLongLines={true}
+          theme={nord}
+          customStyle={{
+            height: '250px',
+            overflowY: 'scroll',
+            fontSize: '0.75rem',
+          }}
+        />
+          {/* <p key={this.state.id}>{this.state.answerCode}</p> */}
+        </div>
+        <button className="downloadBtn"onClick={this.handleClick}>예제 파일 다운로드</button>
       </div>
     );
     // if(this.props.id.indexOf("loading") > -1) {
