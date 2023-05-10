@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Chat from "./chat";
 import Answer from "./answer";
 import Loading from "./loading";
@@ -11,18 +11,22 @@ const Array = (e) => {
   let [chatList, setChatList] = useState([]);
   const [counter, setCounter] = useState(0);
   let [isLoading, setIsLoading] = useState(false);
+  const scrollRef = useRef();
 
   useEffect(() => {  // 로딩 완료 여부 확인
     console.log("reslistchanged:" + isLoading);
     
     setIsLoading((check) => false);
+    scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
   }, [resList])
 
   useEffect(() => {  // 로딩 완료 여부 확인
     console.log("listchanged:" + isLoading);
+
     if(list.length > 0) {
       setIsLoading((check) => true);
     }
+    scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     
   }, [list])
 
@@ -92,7 +96,7 @@ const Array = (e) => {
         <div className="chatTitle">WebSquare5 SP6의 예제가 궁금하세요?
           <Loading dynamicClass={isLoading === true ? '':'loadingStop'}></Loading>
         </div>
-        <div className="chatMain">
+        <div className="chatMain" ref={scrollRef}>
         {list.map((data, i) => {
           return (
             <div className="chatContainer" key={i}>
