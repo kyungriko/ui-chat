@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Chat from "./chat";
 import Answer from "./answer";
+import Loading from "./loading";
 import axios from "axios";
 
 const Array = (e) => {
@@ -9,12 +10,33 @@ const Array = (e) => {
   const [resList, setResList] = useState([]);
   let [chatList, setChatList] = useState([]);
   const [counter, setCounter] = useState(0);
+  let [isLoading, setIsLoading] = useState(false);
+  const scrollRef = useRef();
+
+  useEffect(() => {
+    // 로딩 완료 여부 확인
+    console.log("reslistchanged:" + isLoading);
+
+    setIsLoading((check) => false);
+    scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+  }, [resList]);
+
+  useEffect(() => {
+    // 로딩 완료 여부 확인
+    console.log("listchanged:" + isLoading);
+
+    if (list.length > 0) {
+      setIsLoading((check) => true);
+    }
+    scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+  }, [list]);
 
   const onChange = (e) => {
     setInputText(e.target.value);
   };
 
   const updateChatHistory = (type, str) => {
+    console.log(isLoading);
     setChatList((prevState) => {
       let result = {};
       if (type === "answer") {
@@ -22,7 +44,10 @@ const Array = (e) => {
         let len = tempList.length;
         result = {
           question: tempList[len - 1].question,
-          answer: str,
+          answer: str.message,
+          code: str.code,
+          script: str.script,
+          url: str.url,
           qId: tempList[len - 1].qId,
           aId: tempList[len - 1].aId,
         };
@@ -34,6 +59,9 @@ const Array = (e) => {
         result = {
           question: str,
           answer: "",
+          code: "",
+          script: "",
+          url: "",
           qId: "q" + counter,
           aId: "a" + counter,
         };
@@ -57,7 +85,10 @@ const Array = (e) => {
       .then((result) => {
         const newList = resList.concat(result.data.message);
         setResList(newList);
-        updateChatHistory("answer", result.data.message);
+        setIsLoading((check) => {
+          return false;
+        });
+        updateChatHistory("answer", result.data);
       })
       .catch(() => {
         //error
@@ -68,26 +99,41 @@ const Array = (e) => {
     <div className="chatBox">
       <div className="chatHeader"></div>
       <div className="chat">
-        <div className="chatTitle">WebSquare5 SP6의 예제가 궁금하세요?</div>
-        {list.map((data, i) => {
-          return (
-            <div className="chatContainer" key={i}>
-              <div className="questionContainer" key={chatList[i].qId}>
-                <Chat name={data} id={chatList[i].qId + "question_list"} />
+        <div className="chatTitle">
+          WebSquare5 SP6의 예제가 궁금하세요?
+          <Loading
+            dynamicClass={isLoading === true ? "" : "loadingStop"}
+          ></Loading>
+        </div>
+        <div className="chatMain" ref={scrollRef}>
+          {list.map((data, i) => {
+            return (
+              <div className="chatContainer" key={i}>
+                <div className="questionContainer" key={chatList[i].qId}>
+                  <Chat name={data} id={chatList[i].qId + "question_list"} />
+                </div>
+
+                <div className="answerContainer" key={chatList[i].aId}>
+                  {resList.map((el, idx) => {
+                    if (idx === i) {
+                      return (
+                        <Answer
+                          name={el}
+                          id={chatList[i].aId + "answer_list"}
+                          seq={idx}
+                          answerCode={chatList[i].code}
+                          answerScript={chatList[i].script}
+                          answerUrl={chatList[i].url}
+                        />
+                      );
+                    }
+                  })}
+                  ;
+                </div>
               </div>
-              <div className="answerContainer" key={chatList[i].aId}>
-                {resList.map((el, idx) => {
-                  if (idx === i) {
-                    return (
-                      <Answer name={el} id={chatList[i].aId + "answer_list"} />
-                    );
-                  }
-                })}
-                ;
-              </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
       <div className="send">
         <div className="sendForm">
